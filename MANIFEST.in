@@ -1,0 +1,3 @@
+graft kj/templates
+graft kj/static
+include kj/schema.sql

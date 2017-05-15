@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1，maximum-scale=1, minimum-scale=1,">
+
+    <title>demo</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </head>
+  <body >
+    <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Brand</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+          <li><a href="#">Link</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">One more separated link</a></li>
+            </ul>
+          </li>
+        </ul>
+
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+    <div class="container" style="padding:10px">
+
+      <div class="page-header">
+        <h1>Keep A Journal <small><br>In your school life, for your <label class="primary">future</label></small></h1>
+      </div>
+
+      <div class="container">
+        <p class="lead"><mark>click</mark> the list items to add new events</p>
+
+      </div>
+
+
+      <div class="list-group">
+        <a href="#" class="list-group-item disabled">
+          MY Journal
+        </a>
+        <a href="{{ url_for('show_exp') }}" action="" class="list-group-item"><span class="badge">{{ nums[0] }}</span>Experience<span class="label label-primary" style="margin-left:5px">work</span><span class="label label-primary"style="margin-left:5px">education</span></a>
+        <a href="{{ url_for('show_sc') }}" class="list-group-item"><span class="badge">{{ nums[1] }}</span>School Content<span class="label label-info" style="margin-left:5px">projects</span><span class="label label-info"style="margin-left:5px">HW</span><span class="label label-info"style="margin-left:5px">courses</span></a>
+        <a href="{{ url_for('show_ps') }}" class="list-group-item"><span class="badge">{{ nums[2] }}</span>Professional Skills<span class="label label-success" style="margin-left:5px">Professional</span></a>
+        <a href="{{ url_for('show_ec') }}" class="list-group-item"><span class="badge">{{ nums[3] }}</span>Extra Curricular<span class="label label-warning" style="margin-left:5px">Volunteer</span><span class="label label-warning" style="margin-left:5px">Club</span></a></a>
+        <a href="{{ url_for('show_pj') }}" class="list-group-item"><span class="badge">{{ nums[4] }}</span>Projects<span class="label label-danger" style="margin-left:5px">Personal</span><span class="label label-warning" style="margin-left:5px">Lab</span></a>
+        <a href="{{ url_for('show_ah') }}" class="list-group-item"><span class="badge">{{ nums[5] }}</span>Awards and Honors<span class="label label-warning" style="margin-left:5px">Personal</span><span class="label label-success" style="margin-left:5px">Team</span></a></a>
+      </div>
+
+
+    </div>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+
+
+      </div>
+    </div><!-- /.container-fluid -->
+    </nav>
+  </body>
+
+</html>
