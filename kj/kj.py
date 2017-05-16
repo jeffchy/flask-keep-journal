@@ -11,8 +11,8 @@ app.config.from_object(__name__) # load config from this file , flaskr.py
 app.config.update(dict(
     DATABASE=os.path.join(app.root_path, 'kj.db'),
     SECRET_KEY='development key',
-    USERNAME='admin',
-    PASSWORD='default'
+    USERNAME='jiangchy',
+    PASSWORD='shstujeff97'
 ))
 app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
@@ -106,8 +106,8 @@ def add_exp():
 
 @app.route('/show_exp',methods=['GET'])
 def show_exp():
-    # if not session.get('logged_in'):
-    #     abort(401)
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
     db = get_db() # find all the element of exp
     cur = db.execute('select * from experience order by eventrank desc')
     session['pageid'] = 'Experience';
@@ -121,6 +121,8 @@ def show_exp():
 def add_sc():
     # if not session.get('logged_in'):
     #     abort(401)
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
     session['pageid'] = 'School Content';
     session['pageindex'] = 2;
     return render_template('addentry.html')
@@ -129,6 +131,8 @@ def add_sc():
 def show_sc():
     # if not session.get('logged_in'):
     #     abort(401)
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
     db = get_db() # find all the element of exp
     cur = db.execute('select * from content order by eventrank desc')
     session['pageid'] = 'School Content';
@@ -141,6 +145,9 @@ def show_sc():
 def add_ps():
     # if not session.get('logged_in'):
     #     abort(401)
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+
     session['pageid'] = 'Professional Skill';
     session['pageindex'] = 3;
     return render_template('addentry.html')
@@ -149,6 +156,9 @@ def add_ps():
 def show_ps():
     # if not session.get('logged_in'):
     #     abort(401)
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+
     db = get_db() # find all the element of exp
     cur = db.execute('select * from skill order by eventrank desc')
     session['pageid'] = 'Professional Skill';
@@ -160,6 +170,9 @@ def show_ps():
 def add_ec():
     # if not session.get('logged_in'):
     #     abort(401)
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+
     session['pageid'] = 'Extra Curricular';
     session['pageindex'] = 4;
 
@@ -169,6 +182,9 @@ def add_ec():
 def show_ec():
     # if not session.get('logged_in'):
     #     abort(401)
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+
     db = get_db() # find all the element of exp
     cur = db.execute('select * from curricular order by eventrank desc')
     session['pageid'] = 'Extra Curricular';
@@ -180,6 +196,9 @@ def show_ec():
 def add_pj():
     # if not session.get('logged_in'):
     #     abort(401)
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+
     session['pageid'] = 'Project';
     session['pageindex'] = 5;
 
@@ -189,6 +208,9 @@ def add_pj():
 def show_pj():
     # if not session.get('logged_in'):
     #     abort(401)
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+
     db = get_db() # find all the element of exp
     cur = db.execute('select * from project order by eventrank desc')
     session['pageid'] = 'Project';
@@ -199,6 +221,9 @@ def show_pj():
 def add_ah():
     # if not session.get('logged_in'):
     #     abort(401)
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+
     session['pageid'] = 'Awards and Honor';
     session['pageindex'] = 6;
     return render_template('addentry.html')
@@ -207,6 +232,9 @@ def add_ah():
 def show_ah():
     # if not session.get('logged_in'):
     #     abort(401)
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+
     db = get_db() # find all the element of exp
     cur = db.execute('select * from award order by eventrank desc')
     session['pageid'] = 'Awards and Honor';
@@ -224,5 +252,11 @@ def login():
         else:
             session['logged_in'] = True
             flash('You were logged in')
-            return redirect(url_for('show_entries'))
-    return render_template('login.html', error=error)
+            return redirect(url_for('index'))
+    return render_template('mylogin.html', error=error)
+
+@app.route('/logout')
+def logout():
+    session.pop('logged_in', None)
+    flash('You were logged out')
+    return redirect(url_for('index'))
