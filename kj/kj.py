@@ -70,25 +70,9 @@ def index():
         db.commit()
 
     nums = [len(db.execute('select id from '+ pages[i]).fetchall()) for i in range(1,7)]
-
     session['pageindex'] = 0;
 
     return render_template('index.html', nums=nums)
-
-
-# @app.route('/add_entry')
-# def add_entry():
-#     # if not session.get('logged_in'):
-#     #     abort(401)
-#     db = get_db()
-#     # db.execute('insert into entries (title, text) values (?, ?)',
-#     #              [request.form['title'], request.form['text']])
-#     # db.commit()
-#     session['pageid'] = 1;
-#     flash('New entry was successfully posted')
-#     return render_template('addentry.html')
-#
-#     # return redirect(url_for('show_entries'))
 
 @app.route('/add_exp',methods=['GET'])
 def add_exp():
@@ -104,141 +88,55 @@ def add_exp():
 
     # return redirect(url_for('show_entries'))
 
-@app.route('/show_exp',methods=['GET'])
-def show_exp():
-    if not session.get('logged_in'):
-        return redirect(url_for('login'))
-    db = get_db() # find all the element of exp
-    cur = db.execute('select * from experience order by eventrank desc')
-    session['pageid'] = 'Experience';
-    session['pageindex'] = 1;
-
-    return render_template('showcase.html',list=cur,strtemp='show_exp')
-
-
-
-@app.route('/add_sc',methods=['GET'])
-def add_sc():
+@app.route('/add/<type>',methods=['GET'])
+def add(type):
     # if not session.get('logged_in'):
     #     abort(401)
-    if not session.get('logged_in'):
-        return redirect(url_for('login'))
-    session['pageid'] = 'School Content';
-    session['pageindex'] = 2;
+    db = get_db()
+    # db.execute('insert into entries (title, text) values (?, ?)',
+    #             [request.form['title'], request.form['text']])
+    # db.commit()
+    pageinfo = {
+        'exp':(1,'experience'),
+        'sc':(2,'School Content'),
+        'ps':(3,'Professional Skill'),
+        'ec':(4,'Extra Curricular'),
+        'pj':(5,'Project'),
+        'ah':(6,'Awards and Honor'),
+    }
+    session['pageid'] = pageinfo[type][1]
+    session['pageindex'] = pageinfo[type][0]
+    session['pagetype'] = type
     return render_template('addentry.html')
 
-@app.route('/show_sc',methods=['GET'])
-def show_sc():
-    # if not session.get('logged_in'):
-    #     abort(401)
+
+@app.route('/show/<type>',methods=['POST','GET'])
+def show(type):
     if not session.get('logged_in'):
         return redirect(url_for('login'))
     db = get_db() # find all the element of exp
-    cur = db.execute('select * from content order by eventrank desc')
-    session['pageid'] = 'School Content';
-    session['pageindex'] = 2;
 
-    return render_template('showcase.html',list=cur)
+    pageinfo = {
+        'exp':(1,'experience','experience'),
+        'sc':(2,'School Content','content'),
+        'ps':(3,'Professional Skill','skill'),
+        'ec':(4,'Extra Curricular','curricular'),
+        'pj':(5,'Project','project'),
+        'ah':(6,'Awards and Honor','award'),
+    }
+
+    if request.method == 'POST':
+        print("delete from " + pageinfo[type][2] + "where title=" + request.form['deleteData'])
+        db.execute("delete from " + pageinfo[type][2] + " where title=\'" + request.form['deleteData'] + "\'") ## delete the entry
+        db.commit()
 
 
-@app.route('/add_ps',methods=['GET'])
-def add_ps():
-    # if not session.get('logged_in'):
-    #     abort(401)
-    if not session.get('logged_in'):
-        return redirect(url_for('login'))
 
-    session['pageid'] = 'Professional Skill';
-    session['pageindex'] = 3;
-    return render_template('addentry.html')
+    cur = db.execute('select * from '+ pageinfo[type][2] + ' order by eventrank desc')
+    session['pageid'] = pageinfo[type][1] # 'experience'
+    session['pageindex'] = pageinfo[type][0]
+    session['pagetype'] = type
 
-@app.route('/show_sc',methods=['GET'])
-def show_ps():
-    # if not session.get('logged_in'):
-    #     abort(401)
-    if not session.get('logged_in'):
-        return redirect(url_for('login'))
-
-    db = get_db() # find all the element of exp
-    cur = db.execute('select * from skill order by eventrank desc')
-    session['pageid'] = 'Professional Skill';
-    session['pageindex'] = 3;
-
-    return render_template('showcase.html',list=cur)
-
-@app.route('/add_ec',methods=['GET'])
-def add_ec():
-    # if not session.get('logged_in'):
-    #     abort(401)
-    if not session.get('logged_in'):
-        return redirect(url_for('login'))
-
-    session['pageid'] = 'Extra Curricular';
-    session['pageindex'] = 4;
-
-    return render_template('addentry.html')
-
-@app.route('/show_ec',methods=['GET'])
-def show_ec():
-    # if not session.get('logged_in'):
-    #     abort(401)
-    if not session.get('logged_in'):
-        return redirect(url_for('login'))
-
-    db = get_db() # find all the element of exp
-    cur = db.execute('select * from curricular order by eventrank desc')
-    session['pageid'] = 'Extra Curricular';
-    session['pageindex'] = 4;
-
-    return render_template('showcase.html',list=cur)
-
-@app.route('/add_pj',methods=['GET'])
-def add_pj():
-    # if not session.get('logged_in'):
-    #     abort(401)
-    if not session.get('logged_in'):
-        return redirect(url_for('login'))
-
-    session['pageid'] = 'Project';
-    session['pageindex'] = 5;
-
-    return render_template('addentry.html')
-
-@app.route('/show_pj',methods=['GET'])
-def show_pj():
-    # if not session.get('logged_in'):
-    #     abort(401)
-    if not session.get('logged_in'):
-        return redirect(url_for('login'))
-
-    db = get_db() # find all the element of exp
-    cur = db.execute('select * from project order by eventrank desc')
-    session['pageid'] = 'Project';
-    session['pageindex'] = 5;
-    return render_template('showcase.html',list=cur)
-
-@app.route('/add_ah',methods=['GET'])
-def add_ah():
-    # if not session.get('logged_in'):
-    #     abort(401)
-    if not session.get('logged_in'):
-        return redirect(url_for('login'))
-
-    session['pageid'] = 'Awards and Honor';
-    session['pageindex'] = 6;
-    return render_template('addentry.html')
-
-@app.route('/show_ah',methods=['GET'])
-def show_ah():
-    # if not session.get('logged_in'):
-    #     abort(401)
-    if not session.get('logged_in'):
-        return redirect(url_for('login'))
-
-    db = get_db() # find all the element of exp
-    cur = db.execute('select * from award order by eventrank desc')
-    session['pageid'] = 'Awards and Honor';
-    session['pageindex'] = 6;
     return render_template('showcase.html',list=cur)
 
 @app.route('/login', methods=['GET', 'POST'])

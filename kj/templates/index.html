@@ -43,7 +43,7 @@
               {% else %}
                 <li><a href="{{ url_for('logout') }}">log out</a></li>
               {% endif %}
-              
+
               <li><a href="#">Something else here</a></li>
               <li role="separator" class="divider"></li>
               <li><a href="#">Separated link</a></li>
@@ -73,12 +73,12 @@
         <a href="#" class="list-group-item disabled">
           MY Journal
         </a>
-        <a href="{{ url_for('show_exp') }}" action="" class="list-group-item"><span class="badge">{{ nums[0] }}</span>Experience<span class="label label-primary" style="margin-left:5px">work</span><span class="label label-primary"style="margin-left:5px">education</span></a>
-        <a href="{{ url_for('show_sc') }}" class="list-group-item"><span class="badge">{{ nums[1] }}</span>School Content<span class="label label-info" style="margin-left:5px">projects</span><span class="label label-info"style="margin-left:5px">HW</span><span class="label label-info"style="margin-left:5px">courses</span></a>
-        <a href="{{ url_for('show_ps') }}" class="list-group-item"><span class="badge">{{ nums[2] }}</span>Professional Skills<span class="label label-success" style="margin-left:5px">Professional</span></a>
-        <a href="{{ url_for('show_ec') }}" class="list-group-item"><span class="badge">{{ nums[3] }}</span>Extra Curricular<span class="label label-warning" style="margin-left:5px">Volunteer</span><span class="label label-warning" style="margin-left:5px">Club</span></a></a>
-        <a href="{{ url_for('show_pj') }}" class="list-group-item"><span class="badge">{{ nums[4] }}</span>Projects<span class="label label-danger" style="margin-left:5px">Personal</span><span class="label label-warning" style="margin-left:5px">Lab</span></a>
-        <a href="{{ url_for('show_ah') }}" class="list-group-item"><span class="badge">{{ nums[5] }}</span>Awards and Honors<span class="label label-warning" style="margin-left:5px">Personal</span><span class="label label-success" style="margin-left:5px">Team</span></a></a>
+        <a href="{{ url_for('show',type='exp') }}" action="" class="list-group-item"><span class="badge">{{ nums[0] }}</span>Experience<span class="label label-primary" style="margin-left:5px">work</span><span class="label label-primary"style="margin-left:5px">education</span></a>
+        <a href="{{ url_for('show',type='sc') }}" class="list-group-item"><span class="badge">{{ nums[1] }}</span>School Content<span class="label label-info" style="margin-left:5px">projects</span><span class="label label-info"style="margin-left:5px">HW</span><span class="label label-info"style="margin-left:5px">courses</span></a>
+        <a href="{{ url_for('show',type='ps') }}" class="list-group-item"><span class="badge">{{ nums[2] }}</span>Professional Skills<span class="label label-success" style="margin-left:5px">Professional</span></a>
+        <a href="{{ url_for('show',type='ec') }}" class="list-group-item"><span class="badge">{{ nums[3] }}</span>Extra Curricular<span class="label label-warning" style="margin-left:5px">Volunteer</span><span class="label label-warning" style="margin-left:5px">Club</span></a></a>
+        <a href="{{ url_for('show',type='pj') }}" class="list-group-item"><span class="badge">{{ nums[4] }}</span>Projects<span class="label label-danger" style="margin-left:5px">Personal</span><span class="label label-warning" style="margin-left:5px">Lab</span></a>
+        <a href="{{ url_for('show',type='ah') }}" class="list-group-item"><span class="badge">{{ nums[5] }}</span>Awards and Honors<span class="label label-warning" style="margin-left:5px">Personal</span><span class="label label-success" style="margin-left:5px">Team</span></a></a>
       </div>
 
 

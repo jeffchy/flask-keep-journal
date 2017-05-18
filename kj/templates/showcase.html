@@ -92,9 +92,11 @@
 
                 </div>
                 <div class="col-xs-2">
-                  <button type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove-circle">
+                  <form class="" action="{{ url_for('show',type=session.pagetype) }}" method=post >
+                    <input type="hidden" name="deleteData" value="{{ items.title }}">
+                    <button type="submit" method=post class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove-circle">
 
-
+                  </form>
                 </div>
               </div>
 
@@ -107,17 +109,17 @@
 
 
       {% if session.pageindex is equalto 1 %}
-      <a  href="{{ url_for('add_exp') }}"><button type="button" class="btn btn-primary btn-lg center-block">Large button</button></a>
+      <a  href="{{ url_for('add',type='exp') }}"><button type="button" class="btn btn-primary btn-lg center-block">Large button</button></a>
       {% elif session.pageindex == 2 %}
-      <a  href="{{ url_for('add_sc') }}"><button type="button" class="btn btn-primary btn-lg center-block">Large button</button></a>
+      <a  href="{{ url_for('add',type='sc') }}"><button type="button" class="btn btn-primary btn-lg center-block">Large button</button></a>
       {% elif session.pageindex == 3 %}
-      <a  href="{{ url_for('add_ps') }}"><button type="button" class="btn btn-primary btn-lg center-block">Large button</button></a>
+      <a  href="{{ url_for('add',type='ps') }}"><button type="button" class="btn btn-primary btn-lg center-block">Large button</button></a>
       {% elif session.pageindex == 4 %}
-      <a  href="{{ url_for('add_ec') }}"><button type="button" class="btn btn-primary btn-lg center-block">Large button</button></a>
+      <a  href="{{ url_for('add',type='ec') }}"><button type="button" class="btn btn-primary btn-lg center-block">Large button</button></a>
       {% elif session.pageindex == 5 %}
-      <a  href="{{ url_for('add_pj') }}"><button type="button" class="btn btn-primary btn-lg center-block">Large button</button></a>
+      <a  href="{{ url_for('add',type='pj') }}"><button type="button" class="btn btn-primary btn-lg center-block">Large button</button></a>
       {% else %}
-      <a  href="{{ url_for('add_ah') }}"><button type="button" class="btn btn-primary btn-lg center-block">Large button</button></a>
+      <a  href="{{ url_for('add',type='ah') }}"><button type="button" class="btn btn-primary btn-lg center-block">Large button</button></a>
       {% endif %}
 
 
